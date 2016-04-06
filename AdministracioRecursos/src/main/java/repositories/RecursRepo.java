@@ -13,15 +13,16 @@ import util.HibernateUtil;
 public class RecursRepo {
 
 	public static Recurs getByID(int id) {
-		Recurs c = new Recurs();
+		Recurs recurs = new Recurs();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from recursosupc.recursos where id = " + id);
-			c = (Recurs) query.list().get(0);
-			Hibernate.initialize(c.getId());
+			Query query = session.createQuery("from Recurs where id = = :idVal");
+			query.setLong("idVal", id);
+			recurs = (Recurs) query.list().get(0);
+			Hibernate.initialize(recurs.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -31,7 +32,7 @@ public class RecursRepo {
 				session.close();
 			}
 		}
-		return c;
+		return recurs;
 	}
 
 	public static List<Recurs> getAll() {
@@ -101,5 +102,23 @@ public class RecursRepo {
 			}
 		}
 
+	}
+
+	public static void saveOrUpdate(Object o) {
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+			session.saveOrUpdate(o);
+			session.getTransaction().commit();
+		} catch (Exception e) {
+			if (session != null && session.getTransaction().isActive()) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
 	}
 }

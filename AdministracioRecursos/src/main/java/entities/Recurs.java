@@ -13,21 +13,23 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "recursos", uniqueConstraints = @UniqueConstraint(columnNames = { "nom" }))
 public class Recurs {
 
-	private Integer id;
+	private Long id;
 	private String nom;
+	private Integer type;
+	
 
 	@Id
 	@GeneratedValue (strategy = GenerationType.AUTO, generator = "user_seq_gen")
 	@SequenceGenerator (name = "user_seq_gen", sequenceName = "recursos_id_sec")
-	@Column(name = "id", unique = true, nullable = false)	public Integer getId() {
+	@Column(name = "id", unique = true, nullable = false)	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	@Column(name = "nom", nullable = false, length = 15)
+	@Column(name = "nom", nullable = false, length = 20)
 	public String getNom() {
 		return nom;
 	}
@@ -35,4 +37,15 @@ public class Recurs {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	@Column(name = "type", nullable = false)
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	
+	
 }
