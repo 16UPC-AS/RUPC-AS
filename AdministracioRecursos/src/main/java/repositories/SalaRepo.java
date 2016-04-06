@@ -8,12 +8,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 import entities.Recurs;
+import entities.Sala;
 import util.HibernateUtil;
 
-public class RecursRepo {
+public class SalaRepo {
 
-	public static Recurs getByID(int id) {
-		Recurs recurs = new Recurs();
+	public static Sala getByID(int id) {
+		Sala sala = new Sala();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -21,8 +22,8 @@ public class RecursRepo {
 
 			Query query = session.createQuery("from Recurs where id = :id");
 			query.setLong("id", id);
-			recurs = (Recurs) query.list().get(0);
-			Hibernate.initialize(recurs.getId());
+			sala = (Sala) query.list().get(0);
+			Hibernate.initialize(sala.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -32,11 +33,11 @@ public class RecursRepo {
 				session.close();
 			}
 		}
-		return recurs;
+		return sala;
 	}
 
 	public static Recurs getByPK(Object arr[]) {
-		Recurs recurs = new Recurs();
+		Recurs sala = new Recurs();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -44,8 +45,8 @@ public class RecursRepo {
 
 			Query query = session.createQuery("from Recurs where nom = :nom");
 			query.setString("nom", (String) arr[0]);
-			recurs = (Recurs) query.list().get(0);
-			Hibernate.initialize(recurs.getId());
+			sala = (Recurs) query.list().get(0);
+			Hibernate.initialize(sala.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -55,7 +56,7 @@ public class RecursRepo {
 				session.close();
 			}
 		}
-		return recurs;
+		return sala;
 	}
 
 	public static List<Recurs> getAll() {
@@ -82,7 +83,7 @@ public class RecursRepo {
 	}
 
 	public static Recurs update(int id, String newName) {
-		Recurs recurs = new Recurs();
+		Recurs sala = new Recurs();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -102,7 +103,7 @@ public class RecursRepo {
 				session.close();
 			}
 		}
-		return recurs;
+		return sala;
 
 	}
 

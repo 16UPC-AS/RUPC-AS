@@ -7,8 +7,8 @@ public class TestRecursos {
 
 	public static void main(String[] args) {
 		Recurs u2 = new Recurs();
-		u2.setNom("FakeResource");
-		u2.setType(1);
+		u2.setNom("FakeResource2");
+		u2.setType(0);
 		RecursRepo.saveOrUpdate(u2);
 
 		System.out.println(u2.getId() + " " + u2.getNom() + " " + u2.getType());

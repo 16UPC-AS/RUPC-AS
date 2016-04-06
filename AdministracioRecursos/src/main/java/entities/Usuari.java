@@ -12,7 +12,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "usuaris", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
-public class Usuari{
+public class Usuari {
 
 	private Long id;
 	private String username;
@@ -20,8 +20,8 @@ public class Usuari{
 	private String mail;
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO, generator = "user_seq_gen")
-	@SequenceGenerator (name = "user_seq_gen", sequenceName = "usuaris_id_sec")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")
+	@SequenceGenerator(name = "user_seq_gen", sequenceName = "usuaris_id_sec")
 	@Column(name = "id", unique = true, nullable = false)
 	public Long getId() {
 		return id;
@@ -57,10 +57,9 @@ public class Usuari{
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
+
 	@Transient
-	public Object[] getUniqueConstraint()
-	{
-		return new Object[]{this.getUsername()};
+	public Object[] getUniqueConstraint() {
+		return new Object[] { this.getUsername() };
 	}
 }

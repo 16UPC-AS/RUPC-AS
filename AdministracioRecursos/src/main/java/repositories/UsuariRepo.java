@@ -6,7 +6,6 @@ import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.exception.ConstraintViolationException;
 
 import entities.Usuari;
 import util.HibernateUtil;
@@ -14,16 +13,16 @@ import util.HibernateUtil;
 public class UsuariRepo {
 
 	public static Usuari getByID(Long id) {
-		Usuari c = new Usuari();
+		Usuari user = new Usuari();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Usuari where id = :idVal");
-			query.setLong("idVal", id);
-			c = (Usuari) query.list().get(0);
-			Hibernate.initialize(c.getId());
+			Query query = session.createQuery("from Usuari where id = :id");
+			query.setLong("id", id);
+			user = (Usuari) query.list().get(0);
+			Hibernate.initialize(user.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -33,7 +32,7 @@ public class UsuariRepo {
 				session.close();
 			}
 		}
-		return c;
+		return user;
 	}
 
 	public static Usuari getByPK(Object arr[]) {
@@ -60,14 +59,14 @@ public class UsuariRepo {
 	}
 
 	public static List<Usuari> getAll() {
-		List<Usuari> mList = new ArrayList<Usuari>();
+		List<Usuari> uList = new ArrayList<Usuari>();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
 			Query query = session.createQuery("from Usuari");
-			mList = query.list();
+			uList = query.list();
 
 		} catch (Exception e) {
 			if (session != null) {
@@ -78,7 +77,7 @@ public class UsuariRepo {
 				session.close();
 			}
 		}
-		return mList;
+		return uList;
 
 	}
 
@@ -89,7 +88,8 @@ public class UsuariRepo {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Usuari where id = " + id);
+			Query query = session.createQuery("from Usuari where id = :id");
+			query.setLong("id", id);
 			((Usuari) query.list().get(0)).setNom(newName);
 			session.getTransaction().commit();
 
@@ -112,7 +112,8 @@ public class UsuariRepo {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Usuari where id = " + id);
+			Query query = session.createQuery("from Usuari where id = :id");
+			query.setLong("id", id);
 			session.delete(((Usuari) query.list().get(0)));
 			session.getTransaction().commit();
 

@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
@@ -16,12 +17,12 @@ public class Recurs {
 	private Long id;
 	private String nom;
 	private Integer type;
-	
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO, generator = "user_seq_gen")
-	@SequenceGenerator (name = "user_seq_gen", sequenceName = "recursos_id_sec")
-	@Column(name = "id", unique = true, nullable = false)	public Long getId() {
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")
+	@SequenceGenerator(name = "user_seq_gen", sequenceName = "recursos_id_sec")
+	@Column(name = "id", unique = true, nullable = false)
+	public Long getId() {
 		return id;
 	}
 
@@ -46,6 +47,10 @@ public class Recurs {
 	public void setType(Integer type) {
 		this.type = type;
 	}
-	
-	
+
+	@Transient
+	public Object[] getUniqueConstraint() {
+		return new Object[] { this.getNom() };
+	}
+
 }
