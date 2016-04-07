@@ -12,12 +12,12 @@ import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "sales")
-public class Sala implements Serializable {
+@Table(name = "objectes")
+public class Objecte implements Serializable {
 
 	private Recurs id;
-	private String ubicacio;
-	private Integer aforament;
+	private Sala sala;
+	private Integer type;
 
 	@Id
 	@OneToOne
@@ -30,22 +30,23 @@ public class Sala implements Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "aforament", nullable = false)
-	public Integer getAforament() {
-		return aforament;
+	@OneToOne
+	@JoinColumn(name = "idsala", referencedColumnName = "id", nullable = true)
+	public Sala getSala() {
+		return sala;
 	}
 
-	public void setAforament(Integer aforament) {
-		this.aforament = aforament;
+	public void setSala(Sala sala) {
+		this.sala = sala;
 	}
 
-	@Column(name = "ubicacio", nullable = false, length = 10)
-	public String getUbicacio() {
-		return ubicacio;
+	@Column(name = "type", nullable = false)
+	public Integer getType() {
+		return type;
 	}
 
-	public void setUbicacio(String ubicacio) {
-		this.ubicacio = ubicacio;
+	public void setType(Integer type) {
+		this.type = type;
 	}
 
 	@Transient

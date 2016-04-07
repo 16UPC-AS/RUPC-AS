@@ -6,12 +6,26 @@ import repositories.RecursRepo;
 public class TestRecursos {
 
 	public static void main(String[] args) {
-		Recurs u2 = new Recurs();
-		u2.setNom("FakeResource2");
-		u2.setType(0);
-		RecursRepo.saveOrUpdate(u2);
+		Recurs rec1 = new Recurs();
+		rec1.setNom("FakeSala2");
+		rec1.setType(0);
+		RecursRepo.saveOrUpdate(rec1);
+		System.out.println(rec1.getId() + " " + rec1.getNom() + " " + rec1.getType());
+		
+		
+//		Recurs rec2 = new Recurs();
+//		rec2.setNom("FakePC");
+//		rec2.setType(1);
+//		RecursRepo.saveOrUpdate(rec2);
+//		System.out.println(rec2.getId() + " " + rec2.getNom() + " " + rec2.getType());
+//		
+//		
+//		Recurs rec3 = new Recurs();
+//		rec3.setNom("FakeProjector");
+//		rec3.setType(1);
+//		RecursRepo.saveOrUpdate(rec3);
+//		System.out.println(rec3.getId() + " " + rec3.getNom() + " " + rec3.getType());
 
-		System.out.println(u2.getId() + " " + u2.getNom() + " " + u2.getType());
 		// u2 = UsuariRepo.getByPK(u2.getUniqueConstraint());
 
 	}

@@ -7,23 +7,22 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import entities.Recurs;
-import entities.Sala;
+import entities.Objecte;
 import util.HibernateUtil;
 
-public class SalaRepo {
+public class ObjecteRepo {
 
-	public static Sala getByID(Long id) {
-		Sala sala = new Sala();
+	public static Objecte getByID(int id) {
+		Objecte objecte = new Objecte();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Sala where id = :id");
+			Query query = session.createQuery("from Objecte where id = :id");
 			query.setLong("id", id);
-			sala = (Sala) query.list().get(0);
-			Hibernate.initialize(sala.getId());
+			objecte = (Objecte) query.list().get(0);
+			Hibernate.initialize(objecte.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -33,20 +32,20 @@ public class SalaRepo {
 				session.close();
 			}
 		}
-		return sala;
+		return objecte;
 	}
 
-	public static Recurs getByPK(Object arr[]) {
-		Recurs sala = new Recurs();
+	public static Objecte getByPK(Object arr[]) {
+		Objecte objecte = new Objecte();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Recurs where nom = :nom");
+			Query query = session.createQuery("from Objecte where nom = :nom");
 			query.setString("nom", (String) arr[0]);
-			sala = (Recurs) query.list().get(0);
-			Hibernate.initialize(sala.getId());
+			objecte = (Objecte) query.list().get(0);
+			Hibernate.initialize(objecte.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -56,17 +55,17 @@ public class SalaRepo {
 				session.close();
 			}
 		}
-		return sala;
+		return objecte;
 	}
 
-	public static List<Recurs> getAll() {
-		List<Recurs> mList = new ArrayList<Recurs>();
+	public static List<Objecte> getAll() {
+		List<Objecte> mList = new ArrayList<Objecte>();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Recurs");
+			Query query = session.createQuery("from Objecte");
 			mList = query.list();
 
 		} catch (Exception e) {
@@ -82,29 +81,9 @@ public class SalaRepo {
 
 	}
 
-	public static Recurs update(int id, String newName) {
-		Recurs sala = new Recurs();
-		Session session = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
-
-			Query query = session.createQuery("from Recurs where id = :id");
-			query.setLong("id", id);
-			((Recurs) query.list().get(0)).setNom(newName);
-			session.getTransaction().commit();
-
-		} catch (Exception e) {
-			if (session != null) {
-				session.getTransaction().rollback();
-			}
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return sala;
-
+	public static Objecte update(int id, String newName) {
+		Objecte objecte = new Objecte();
+		return objecte;
 	}
 
 	public static void delete(int id) {
@@ -113,9 +92,9 @@ public class SalaRepo {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Recurs where id = :id");
+			Query query = session.createQuery("from Objecte where id = :id");
 			query.setLong("id", id);
-			session.delete(((Recurs) query.list().get(0)));
+			session.delete(((Objecte) query.list().get(0)));
 			session.getTransaction().commit();
 
 		} catch (Exception e) {
