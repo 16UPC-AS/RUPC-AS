@@ -10,9 +10,9 @@ import org.hibernate.Session;
 import entities.Recurs;
 import util.HibernateUtil;
 
-public class RecursRepo {
+public class RecursRepo extends BasicRepo {
 
-	public static Recurs getByID(int id) {
+	public static Recurs getByID(Long id) {
 		Recurs recurs = new Recurs();
 		Session session = null;
 		try {
@@ -81,7 +81,7 @@ public class RecursRepo {
 
 	}
 
-	public static Recurs update(int id, String newName) {
+	public static Recurs update(Long id, String newName) {
 		Recurs recurs = new Recurs();
 		Session session = null;
 		try {
@@ -106,7 +106,7 @@ public class RecursRepo {
 
 	}
 
-	public static void delete(int id) {
+	public static void delete(Long id) {
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
@@ -129,21 +129,4 @@ public class RecursRepo {
 
 	}
 
-	public static void saveOrUpdate(Object o) {
-		Session session = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
-			session.saveOrUpdate(o);
-			session.getTransaction().commit();
-		} catch (Exception e) {
-			if (session != null && session.getTransaction().isActive()) {
-				session.getTransaction().rollback();
-			}
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-	}
 }

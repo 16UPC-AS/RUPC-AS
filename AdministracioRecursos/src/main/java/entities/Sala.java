@@ -27,7 +27,9 @@ public class Sala implements Serializable {
 	}
 
 	public void setId(Recurs id) {
-		this.id = id;
+		if (id.getType() == 0)
+			this.id = id;
+		else System.out.println("El Recurs "+id.getNom()+" no és una Sala");
 	}
 
 	@Column(name = "aforament", nullable = false)
