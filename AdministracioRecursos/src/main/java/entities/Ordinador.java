@@ -29,7 +29,8 @@ public class Ordinador implements Serializable {
 	public void setId(Objecte id) {
 		if (id.getType() == 0)
 			this.id = id;
-		else System.out.println("L'Objecte "+id.getId().getNom()+" no és un Ordinador");
+		else
+			System.out.println("L'Objecte " + id.getId().getNom() + " no és un Ordinador");
 	}
 
 	@Column(name = "marca", nullable = false, length = 20)

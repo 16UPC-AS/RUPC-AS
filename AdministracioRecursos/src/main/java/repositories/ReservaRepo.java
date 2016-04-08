@@ -7,22 +7,23 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import entities.Objecte;
+import entities.Recurs;
+import entities.Reserva;
 import util.HibernateUtil;
 
-public class ObjecteRepo extends BasicRepo {
+public class ReservaRepo extends BasicRepo {
 
-	public static Objecte getByID(Long id) {
-		Objecte objecte = new Objecte();
+	public static Reserva getByID(Long id) {
+		Reserva reserva = new Reserva();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Objecte where id = :id");
+			Query query = session.createQuery("from Reserva where id = :id");
 			query.setLong("id", id);
-			objecte = (Objecte) query.list().get(0);
-			Hibernate.initialize(objecte.getId());
+			reserva = (Reserva) query.list().get(0);
+			Hibernate.initialize(reserva.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -32,17 +33,17 @@ public class ObjecteRepo extends BasicRepo {
 				session.close();
 			}
 		}
-		return objecte;
+		return reserva;
 	}
 
-	public static List<Objecte> getAll() {
-		List<Objecte> mList = new ArrayList<Objecte>();
+	public static List<Recurs> getAll() {
+		List<Recurs> mList = new ArrayList<Recurs>();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Objecte");
+			Query query = session.createQuery("from Reserva");
 			mList = query.list();
 
 		} catch (Exception e) {

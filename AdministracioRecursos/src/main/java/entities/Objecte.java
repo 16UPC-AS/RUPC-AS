@@ -29,7 +29,8 @@ public class Objecte implements Serializable {
 	public void setId(Recurs id) {
 		if (id.getType() == 1)
 			this.id = id;
-		else System.out.println("El Recurs "+id.getNom()+" no és un Objecte");
+		else
+			System.out.println("El Recurs " + id.getNom() + " no és un Objecte");
 	}
 
 	@OneToOne

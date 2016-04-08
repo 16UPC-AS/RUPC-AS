@@ -17,5 +17,6 @@
 		<mapping class="entities.Objecte" />
 		<mapping class="entities.Ordinador" />
 		<mapping class="entities.Projector" />
+		<mapping class="entities.Reserva" />
 	</session-factory>
 </hibernate-configuration>
