@@ -29,7 +29,7 @@ public class Projector implements Serializable {
 		if (id.getType() == 1)
 			this.id = id;
 		else
-			System.out.println("L'Objecte " + id.getId().getNom() + " no és un Projector");
+			System.out.println("L'Objecte " + id.getId().getNom() + " no es un Projector");
 	}
 
 	@Column(name = "resolucio", nullable = false, length = 20)
