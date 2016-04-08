@@ -15,5 +15,7 @@
 		<mapping class="entities.Recurs" />
 		<mapping class="entities.Sala" />
 		<mapping class="entities.Objecte" />
+		<mapping class="entities.Ordinador" />
+		<mapping class="entities.Projector" />
 	</session-factory>
 </hibernate-configuration>

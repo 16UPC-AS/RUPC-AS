@@ -12,22 +12,22 @@ public class TestObjectes {
 	public static void main(String[] args) {
 
 		/**
-		 * Objecte (pc) sense sala
+		 * Objecte (pc {type = 0 }) sense sala
 		 */
 		Recurs recPC = new Recurs();
-		recPC.setNom("FakeSala2");
+		recPC.setNom("FakePC");
 		recPC = RecursRepo.getByPK(recPC.getUniqueConstraint());
 		Objecte pc = new Objecte();
 		pc.setId(recPC);
-		pc.setType(1);
+		pc.setType(0);
 
 		ObjecteRepo.saveOrUpdate(pc);
 		System.out.println(pc.getId().getId() + " " + pc.getId().getNom() + " " + pc.getId().getType() + " "
 				+ pc.getType() + " " + pc.getSala());
 
-//		/**
-//		 * Objecte (projector) amb sala
-//		 */
+		/**
+		 * Objecte (projector {type = 1 }) amb sala
+		 */
 //		Recurs recProj = new Recurs();
 //		recProj.setNom("FakeProjector");
 //		recProj = RecursRepo.getByPK(recProj.getUniqueConstraint());
