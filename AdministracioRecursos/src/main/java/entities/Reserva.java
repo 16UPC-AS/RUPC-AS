@@ -2,13 +2,19 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -16,7 +22,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "idrecurs", "data", "horainici" }))
@@ -30,6 +35,7 @@ public class Reserva implements Serializable {
 	private Integer horaFi;
 	private String comentari;
 	private Boolean esAmbNotificacio;
+	private Set<Usuari> usuaris = new HashSet<Usuari> ();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")
@@ -107,6 +113,16 @@ public class Reserva implements Serializable {
 
 	public void setEsAmbNotificacio(Boolean esAmbNotificacio) {
 		this.esAmbNotificacio = esAmbNotificacio;
+	}
+
+	@ManyToMany (fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+	@JoinTable (name = "esnotifica", joinColumns = {@JoinColumn (name = "idreserva", nullable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn (name = "idusuari", nullable = false, updatable = false)})
+	public Set<Usuari> getUsuaris() {
+		return usuaris;
+	}
+
+	public void setUsuaris(Set<Usuari> usuaris) {
+		this.usuaris = usuaris;
 	}
 
 	@Transient

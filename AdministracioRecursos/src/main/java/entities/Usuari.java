@@ -1,10 +1,14 @@
 package entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -18,6 +22,7 @@ public class Usuari {
 	private String username;
 	private String nom;
 	private String mail;
+	private Set<Reserva> reserves = new HashSet<Reserva> ();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")
@@ -56,6 +61,15 @@ public class Usuari {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+
+	@ManyToMany (mappedBy = "usuaris", targetEntity = Reserva.class)
+	public Set<Reserva> getReserves() {
+		return reserves;
+	}
+
+	public void setReserves(Set<Reserva> reserves) {
+		this.reserves = reserves;
 	}
 
 	@Transient

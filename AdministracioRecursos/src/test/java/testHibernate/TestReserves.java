@@ -19,7 +19,7 @@ public class TestReserves {
 		 Calendar cal = Calendar.getInstance();
 		 cal.set(Calendar.YEAR, 2016);
 		 cal.set(Calendar.MONTH, Calendar.APRIL);
-		 cal.set(Calendar.DAY_OF_MONTH, 10);
+		 cal.set(Calendar.DAY_OF_MONTH, 16);
 		 Date d = cal.getTime();
 		
 		
@@ -30,6 +30,7 @@ public class TestReserves {
 		 resv.setHoraInici(10);
 		 resv.setHoraFi(12);
 		 resv.setEsAmbNotificacio(false);
+		 resv.getUsuaris().add(u);
 		 OrdinadorRepo.saveOrUpdate(resv);
 
 //		Reserva res = ReservaRepo.getByID(2L);
