@@ -18,6 +18,17 @@ public class Projector implements Serializable {
 	private Objecte id;
 	private String resolucio;
 
+	
+	public Projector(Objecte id, String resolucio) {
+		super();
+		this.id = id;
+		this.resolucio = resolucio;
+	}
+
+	public Projector() {
+		super();
+	}
+
 	@Id
 	@OneToOne
 	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
