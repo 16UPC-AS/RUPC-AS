@@ -2,6 +2,7 @@ package entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,8 +20,19 @@ public class Objecte implements Serializable {
 	private Sala sala;
 	private Integer type;
 
+	public Objecte(Recurs id, Sala sala, Integer type) {
+		super();
+		this.id = id;
+		this.sala = sala;
+		this.type = type;
+	}
+
+	public Objecte() {
+		super();
+	}
+
 	@Id
-	@OneToOne
+	@OneToOne(cascade = { CascadeType.PERSIST })
 	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
 	public Recurs getId() {
 		return id;

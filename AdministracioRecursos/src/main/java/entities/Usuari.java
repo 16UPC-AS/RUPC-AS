@@ -15,14 +15,25 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "usuaris", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
+@Table(name = "usuaris", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }) )
 public class Usuari {
 
 	private Long id;
 	private String username;
 	private String nom;
 	private String mail;
-	private Set<Reserva> reserves = new HashSet<Reserva> ();
+	private Set<Reserva> reserves = new HashSet<Reserva>();
+
+	public Usuari(String username, String nom, String mail) {
+		super();
+		this.username = username;
+		this.nom = nom;
+		this.mail = mail;
+	}
+
+	public Usuari() {
+		super();
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")
@@ -63,7 +74,7 @@ public class Usuari {
 		this.mail = mail;
 	}
 
-	@ManyToMany (mappedBy = "usuaris", targetEntity = Reserva.class)
+	@ManyToMany(mappedBy = "usuaris", targetEntity = Reserva.class)
 	public Set<Reserva> getReserves() {
 		return reserves;
 	}

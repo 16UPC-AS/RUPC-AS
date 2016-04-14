@@ -19,6 +19,17 @@ public class Sala implements Serializable {
 	private String ubicacio;
 	private Integer aforament;
 
+	public Sala(Recurs id, String ubicacio, Integer aforament) {
+		super();
+		this.id = id;
+		this.ubicacio = ubicacio;
+		this.aforament = aforament;
+	}
+
+	public Sala() {
+		super();
+	}
+
 	@Id
 	@OneToOne
 	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
