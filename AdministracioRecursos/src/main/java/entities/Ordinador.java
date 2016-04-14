@@ -19,17 +19,6 @@ public class Ordinador implements Serializable {
 	private String marca;
 	private String model;
 
-	public Ordinador(Objecte id, String marca, String model) {
-		super();
-		this.id = id;
-		this.marca = marca;
-		this.model = model;
-	}
-
-	public Ordinador() {
-		super();
-	}
-
 	@Id
 	@OneToOne
 	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)

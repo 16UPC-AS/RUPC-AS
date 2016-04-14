@@ -14,7 +14,9 @@ public class TestRecursos {
 		// rec1.getType());
 		//
 		//
-		Recurs rec2 = new Recurs("FakePC", 1);
+		Recurs rec2 = new Recurs();
+		rec2.setNom("FakePC");
+		rec2.setType(1);
 		RecursRepo.saveOrUpdate(rec2);
 		System.out.println(rec2.getId() + " " + rec2.getNom() + " " + rec2.getType());
 

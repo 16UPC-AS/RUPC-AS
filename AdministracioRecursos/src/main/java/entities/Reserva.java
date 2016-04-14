@@ -22,10 +22,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "idrecurs", "data", "horainici" }) )
+@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "idrecurs", "data", "horainici" }))
 public class Reserva implements Serializable {
 
 	private Long id;
@@ -36,24 +35,7 @@ public class Reserva implements Serializable {
 	private Integer horaFi;
 	private String comentari;
 	private Boolean esAmbNotificacio;
-	private Set<Usuari> usuaris = new HashSet<Usuari>();
-
-	public Reserva(Recurs recurs, Usuari usuari, Date data, Integer horaInici, Integer horaFi, String comentari,
-			Boolean esAmbNotificacio) {
-		super();
-		this.recurs = recurs;
-		this.usuari = usuari;
-		this.data = data;
-		this.horaInici = horaInici;
-		this.horaFi = horaFi;
-		this.comentari = comentari;
-		this.esAmbNotificacio = esAmbNotificacio;
-		usuaris.add(usuari);
-	}
-
-	public Reserva() {
-		super();
-	}
+	private Set<Usuari> usuaris = new HashSet<Usuari> ();
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")
@@ -133,10 +115,8 @@ public class Reserva implements Serializable {
 		this.esAmbNotificacio = esAmbNotificacio;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
-	@JoinTable(name = "esnotifica", joinColumns = {
-			@JoinColumn(name = "idreserva", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "idusuari", nullable = false, updatable = false) })
+	@ManyToMany (fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
+	@JoinTable (name = "esnotifica", joinColumns = {@JoinColumn (name = "idreserva", nullable = false, updatable = false)}, inverseJoinColumns = {@JoinColumn (name = "idusuari", nullable = false, updatable = false)})
 	public Set<Usuari> getUsuaris() {
 		return usuaris;
 	}
@@ -147,7 +127,7 @@ public class Reserva implements Serializable {
 
 	@Transient
 	public Object[] getUniqueConstraint() {
-		return new Object[] { getRecurs(), getData(), getHoraInici() };
+		return new Object[] {getRecurs(), getData(), getHoraInici() };
 	}
 
 }

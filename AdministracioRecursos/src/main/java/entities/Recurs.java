@@ -11,27 +11,12 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "recursos", uniqueConstraints = @UniqueConstraint(columnNames = { "nom" }) )
+@Table(name = "recursos", uniqueConstraints = @UniqueConstraint(columnNames = { "nom" }))
 public class Recurs {
 
 	private Long id;
 	private String nom;
 	private Integer type;
-
-	public Recurs(String nom, Integer type) {
-		super();
-		this.nom = nom;
-		this.type = type;
-	}
-
-	public Recurs(String nom) {
-		super();
-		this.nom = nom;
-	}
-
-	public Recurs() {
-		super();
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")

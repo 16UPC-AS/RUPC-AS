@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,19 +18,8 @@ public class Projector implements Serializable {
 	private Objecte id;
 	private String resolucio;
 
-	
-	public Projector(Objecte id, String resolucio) {
-		super();
-		this.id = id;
-		this.resolucio = resolucio;
-	}
-
-	public Projector() {
-		super();
-	}
-
 	@Id
-	@OneToOne(cascade = { CascadeType.PERSIST })
+	@OneToOne
 	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
 	public Objecte getId() {
 		return id;
