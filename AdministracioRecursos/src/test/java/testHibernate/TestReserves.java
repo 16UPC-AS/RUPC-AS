@@ -14,15 +14,15 @@ import repositories.UsuariRepo;
 public class TestReserves {
 
 	public static void main(String[] args) {
-		Recurs rec = RecursRepo.getByID(2L);
-		Usuari u = UsuariRepo.getByID(1L);
+		Recurs rec = RecursRepo.getByPK(new Object[]{"FakeSala"});
+		Usuari u = UsuariRepo.getByPK(new Object[]{"FakeUser"});
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2016);
 		cal.set(Calendar.MONTH, Calendar.APRIL);
-		cal.set(Calendar.DAY_OF_MONTH, 16);
+		cal.set(Calendar.DAY_OF_MONTH, 17);
 		Date d = cal.getTime();
 
-		Reserva resv = new Reserva(rec, u, d, 10, 12, null, false);
+		Reserva resv = new Reserva(rec, u, d, 10, 12, "Prova diversa", false);
 		OrdinadorRepo.saveOrUpdate(resv);
 
 		// Reserva res = ReservaRepo.getByID(2L);

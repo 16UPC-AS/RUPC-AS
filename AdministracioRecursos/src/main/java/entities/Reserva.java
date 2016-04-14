@@ -48,7 +48,7 @@ public class Reserva implements Serializable {
 		this.horaFi = horaFi;
 		this.comentari = comentari;
 		this.esAmbNotificacio = esAmbNotificacio;
-		usuaris.add(usuari);
+		if (this.esAmbNotificacio) usuaris.add(usuari);
 	}
 
 	public Reserva() {

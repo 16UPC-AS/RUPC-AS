@@ -18,7 +18,6 @@ public class Projector implements Serializable {
 	private Objecte id;
 	private String resolucio;
 
-	
 	public Projector(Objecte id, String resolucio) {
 		super();
 		this.id = id;
@@ -54,7 +53,7 @@ public class Projector implements Serializable {
 
 	@Transient
 	public Object[] getUniqueConstraint() {
-		return new Object[] {};
+		return this.id.getUniqueConstraint() ;
 	}
 
 }

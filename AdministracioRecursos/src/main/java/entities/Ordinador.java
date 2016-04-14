@@ -64,7 +64,7 @@ public class Ordinador implements Serializable {
 
 	@Transient
 	public Object[] getUniqueConstraint() {
-		return new Object[] {};
+		return this.id.getUniqueConstraint() ;
 	}
 
 }

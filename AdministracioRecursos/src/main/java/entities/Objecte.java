@@ -65,7 +65,7 @@ public class Objecte implements Serializable {
 
 	@Transient
 	public Object[] getUniqueConstraint() {
-		return new Object[] {};
+		return this.id.getUniqueConstraint() ;
 	}
 
 }

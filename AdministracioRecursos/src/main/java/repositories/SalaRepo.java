@@ -35,6 +35,29 @@ public class SalaRepo extends BasicRepo {
 		}
 		return sala;
 	}
+	
+	public static Sala getByPK(Object arr[]) {
+		Recurs recurs = new Recurs();
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+
+			Query query = session.createQuery("from Recurs where nom = :nom");
+			query.setString("nom", (String) arr[0]);
+			recurs = (Recurs) query.list().get(0);
+			Hibernate.initialize(recurs.getId());
+		} catch (Exception e) {
+			if (session != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return getByID(recurs.getId());
+	}
 
 	public static List<Recurs> getAll() {
 		List<Recurs> mList = new ArrayList<Recurs>();
