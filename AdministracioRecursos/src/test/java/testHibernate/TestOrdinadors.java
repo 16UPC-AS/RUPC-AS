@@ -10,15 +10,11 @@ import repositories.RecursRepo;
 public class TestOrdinadors {
 
 	public static void main(String[] args) {
-		Recurs rec = new Recurs();
-		rec.setNom("FakePC");
-		rec = RecursRepo.getByPK(rec.getUniqueConstraint());
-		Objecte obj = ObjecteRepo.getByID(rec.getId());
-		Ordinador ord = new Ordinador();
-		ord.setId(obj);
-		ord.setMarca("FakeMarca");
-		ord.setModel("FakeModel");
+		Recurs recOrd = new Recurs("FakePC", 1);
+		RecursRepo.saveOrUpdate(recOrd);
+		Objecte objOrd = new Objecte(recOrd, null, 0);
+		ObjecteRepo.saveOrUpdate(objOrd);
+		Ordinador ord = new Ordinador(objOrd,"FakeMarca","FakeModel");
 		OrdinadorRepo.saveOrUpdate(ord);
-
 	}
 }

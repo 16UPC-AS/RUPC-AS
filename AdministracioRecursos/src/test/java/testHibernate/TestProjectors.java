@@ -10,13 +10,13 @@ import repositories.RecursRepo;
 public class TestProjectors {
 
 	public static void main(String[] args) {
-		Recurs rec = new Recurs();
-		rec.setNom("FakeProjector");
-		rec = RecursRepo.getByPK(rec.getUniqueConstraint());
-		Objecte obj = ObjecteRepo.getByID(rec.getId());
-		Projector proj = new Projector();
-		proj.setId(obj);
-		proj.setResolucio("1234x5678");
+		
+		Recurs recProj = new Recurs("FakeProjector", 1);
+		RecursRepo.saveOrUpdate(recProj);
+		Objecte objProj = new Objecte(recProj, null, 1);
+		ObjecteRepo.saveOrUpdate(objProj);
+		
+		Projector proj = new Projector(objProj, "1234x5678");
 		ProjectorRepo.saveOrUpdate(proj);
 	}
 }
