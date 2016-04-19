@@ -3,12 +3,14 @@ package casosDus;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import dades.FactoriaDades;
 import entities.Reserva;
 import entities.Usuari;
+import repositories.BasicRepo;
 
 public class CUUsuarisAAsig {
 
@@ -70,5 +72,17 @@ public class CUUsuarisAAsig {
 		setData(d);
 		setHoraInici(hi);
 		return infoUsuaris;
+	}
+
+	public static void afegirUsuarisAReserva(ArrayList<String> usuaris) {
+
+		Set<Usuari> usuReserv = new HashSet<Usuari>();
+		for (String u : usuaris) {
+			usuReserv.add(FactoriaDades.getCtrlUsuari().getByPK(u));
+		}
+		Reserva r = FactoriaDades.getCtrlReserva().getByPK(getNomRecurs(), getData(), getHoraInici());
+		r.getUsuaris().addAll(usuReserv);
+		BasicRepo.saveOrUpdate(r);
+
 	}
 }
