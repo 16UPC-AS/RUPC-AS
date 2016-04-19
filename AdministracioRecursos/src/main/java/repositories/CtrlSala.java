@@ -12,15 +12,15 @@ import util.HibernateUtil;
 
 public class CtrlSala extends BasicRepo {
 
-	public static Sala getByID(Long id) {
+	public static Sala getByPK(String nom) {
 		Sala sala = new Sala();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Sala where id = :id");
-			query.setLong("id", id);
+			Query query = session.createQuery("from Sala where nom = :nom");
+			query.setString("nom", nom);
 			sala = (Sala) query.list().get(0);
 		} catch (Exception e) {
 			if (session != null) {

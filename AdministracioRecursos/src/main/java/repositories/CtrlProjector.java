@@ -13,15 +13,15 @@ import util.HibernateUtil;
 
 public class CtrlProjector extends BasicRepo {
 
-	public static Projector getByID(Long id) {
+	public static Projector getByPK(String nom) {
 		Projector projector = new Projector();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Projector where id = :id");
-			query.setLong("id", id);
+			Query query = session.createQuery("from Projector where nom = :nom");
+			query.setString("nom", nom);
 			projector = (Projector) query.list().get(0);
 			Hibernate.initialize(projector.getSala());
 		} catch (Exception e) {

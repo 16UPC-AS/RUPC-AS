@@ -14,7 +14,6 @@
 		<mapping class="entities.Usuari" />
 		<mapping class="entities.Recurs" />
 		<mapping class="entities.Sala" />
-		<mapping class="entities.Objecte" />
 		<mapping class="entities.Ordinador" />
 		<mapping class="entities.Projector" />
 		<mapping class="entities.Reserva" />

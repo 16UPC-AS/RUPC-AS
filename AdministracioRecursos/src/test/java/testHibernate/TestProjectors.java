@@ -1,13 +1,5 @@
 package testHibernate;
 
-import entities.Objecte;
-import entities.Projector;
-import entities.Recurs;
-import repositories.ObjecteRepo;
-import repositories.CtrlProjector;
-import repositories.CtrlRecurs;
-import repositories.CtrlSala;
-
 public class TestProjectors {
 //
 //	private static Projector newProjector(String nom, String nomSala, String resolucio) {

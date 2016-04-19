@@ -1,16 +1,12 @@
 package entities;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import repositories.ObjecteRepo;
-import repositories.CtrlOrdinador;
-import repositories.CtrlProjector;
+import javax.persistence.Transient;		
 
 @Entity
 @Table(name = "sales")
@@ -18,6 +14,8 @@ public class Sala extends Recurs {
 
 	private String ubicacio;
 	private Integer aforament;
+	private Ordinador ordinador;
+	private Projector projector;
 
 	public Sala(String nom, String ubicacio, Integer aforament) {
 		super(nom);
@@ -47,39 +45,50 @@ public class Sala extends Recurs {
 		this.ubicacio = ubicacio;
 	}
 
+	@OneToOne(mappedBy = "sala")
+	public Ordinador getOrdinador() {
+		return ordinador;
+	}
+
+	public void setOrdinador(Ordinador ordinador) {
+		this.ordinador = ordinador;
+	}
+
+	@OneToOne(mappedBy = "sala")
+	public Projector getProjector() {
+		return projector;
+	}
+
+	public void setProjector(Projector projector) {
+		this.projector = projector;
+	}
+
 	@Transient
 	public Object[] getUniqueConstraint() {
 		return super.getUniqueConstraint();
 	}
 
 	@Transient
-	public ArrayList<String> getInfo(ObjecteRepo objRep, CtrlOrdinador ordRep, CtrlProjector projRep) {
+	@Override
+	public ArrayList<String> getInfo() {
 		ArrayList<String> info = new ArrayList<String>();
-//		info.add(ubicacio);
-//		info.add(aforament.toString());
-//		// ArrayList<String> infoObj = new ArrayList<String>();
-//		List<Objecte> oList = objRep.getBySala(this);
-//		if (oList != null) {
-//			ArrayList<String> auxPc = null;
-//			ArrayList<String> auxPr = null;
-//			for (Objecte o : oList) {
-//				if (o.getType() == 0)
-//					auxPc = o.getInfo(ordRep, projRep);
-//				else
-//					auxPr = o.getInfo(ordRep, projRep);
-//			}
-//			if (auxPc != null) {
-//				info.add(auxPc.get(0));
-//				info.add(auxPc.get(1));
-//			} else {
-//				info.add(null);
-//				info.add(null);
-//			}
-//			if (auxPr != null)
-//				info.add(auxPr.get(2));
-//			else
-//				info.add(null);
-//		}
+		info.add(getNom());
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		info.add(ubicacio);
+		info.add(aforament.toString());
+		if (getOrdinador() != null) {
+			info.add(getOrdinador().getMarca());
+			info.add(getOrdinador().getModel());
+		} else {
+			info.add(null);
+			info.add(null);
+		}
+		if (getProjector() != null)
+			;
+		else
+			info.add(null);
 		return info;
 	}
 

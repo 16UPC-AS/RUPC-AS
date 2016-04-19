@@ -62,10 +62,18 @@ public class Ordinador extends Recurs {
 	}
 
 	@Transient
+	@Override
 	public ArrayList<String> getInfo() {
 		ArrayList<String> info = new ArrayList<String>();
+		info.add(getNom());
 		info.add(marca);
 		info.add(model);
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		info.add(null);
 		return info;
 	}
 

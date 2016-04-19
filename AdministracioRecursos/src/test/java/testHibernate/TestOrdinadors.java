@@ -1,13 +1,5 @@
 package testHibernate;
 
-import entities.Objecte;
-import entities.Ordinador;
-import entities.Recurs;
-import repositories.ObjecteRepo;
-import repositories.CtrlOrdinador;
-import repositories.CtrlRecurs;
-import repositories.CtrlSala;
-
 public class TestOrdinadors {
 //
 //	private static Ordinador newOrdinador(String nom, String nomSala, String marca, String model) {

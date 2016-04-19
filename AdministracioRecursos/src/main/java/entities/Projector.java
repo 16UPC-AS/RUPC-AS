@@ -51,9 +51,20 @@ public class Projector extends Recurs {
 	}
 
 	@Transient
+	@Override
 	public ArrayList<String> getInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> info = new ArrayList<String>();
+		info.add(getNom());
+		info.add(null);
+		info.add(null);
+		info.add(resolucio);
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		info.add(null);
+		return info;
 	}
 
 }

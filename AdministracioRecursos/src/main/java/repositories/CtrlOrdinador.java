@@ -3,7 +3,6 @@ package repositories;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -13,15 +12,15 @@ import util.HibernateUtil;
 
 public class CtrlOrdinador extends BasicRepo {
 
-	public static Ordinador getByID(Long id) {
+	public static Ordinador getByPK(String nom) {
 		Ordinador ordinador = new Ordinador();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Ordinador where id = :id");
-			query.setLong("id", id);
+			Query query = session.createQuery("from Ordinador where nom = :nom");
+			query.setString("nom", nom);
 			ordinador = (Ordinador) query.list().get(0);
 		} catch (Exception e) {
 			if (session != null) {

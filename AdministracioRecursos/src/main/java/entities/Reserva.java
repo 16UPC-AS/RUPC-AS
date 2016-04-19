@@ -25,7 +25,7 @@ import javax.persistence.UniqueConstraint;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "idrecurs", "data", "horainici" }) )
+@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "recurs", "data", "horainici" }) )
 public class Reserva implements Serializable {
 
 	private Long id;
