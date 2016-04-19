@@ -1,6 +1,7 @@
 package repositories;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Hibernate;
@@ -22,6 +23,31 @@ public class CtrlReserva extends BasicRepo {
 
 			Query query = session.createQuery("from Reserva where id = :id");
 			query.setLong("id", id);
+			reserva = (Reserva) query.list().get(0);
+			Hibernate.initialize(reserva.getId());
+		} catch (Exception e) {
+			if (session != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return reserva;
+	}
+
+	public static Reserva getByPK(String nomR, Date d, Integer hi) {
+		Reserva reserva = new Reserva();
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+
+			Query query = session.createQuery("from Reserva where recurs =:nomR and data = :d and horainici=:hi ");
+			query.setString("nomR", nomR);
+			query.setDate("d", d);
+			query.setInteger("hi", hi);
 			reserva = (Reserva) query.list().get(0);
 			Hibernate.initialize(reserva.getId());
 		} catch (Exception e) {
