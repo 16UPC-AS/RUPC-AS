@@ -6,16 +6,16 @@ import java.util.Date;
 import entities.Recurs;
 import entities.Reserva;
 import entities.Usuari;
-import repositories.OrdinadorRepo;
-import repositories.RecursRepo;
-import repositories.ReservaRepo;
-import repositories.UsuariRepo;
+import repositories.CtrlOrdinador;
+import repositories.CtrlRecurs;
+import repositories.CtrlReserva;
+import repositories.CtrlUsuari;
 
 public class TestReserves {
 
 	public static void main(String[] args) {
-		Recurs rec = RecursRepo.getByPK(new Object[]{"FakeSala"});
-		Usuari u = UsuariRepo.getByPK(new Object[]{"FakeUser"});
+		Recurs rec = CtrlRecurs.getByPK(new Object[]{"FakeSala"});
+		Usuari u = CtrlUsuari.getByPK(new Object[]{"FakeUser"});
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, 2016);
 		cal.set(Calendar.MONTH, Calendar.APRIL);
@@ -23,7 +23,7 @@ public class TestReserves {
 		Date d = cal.getTime();
 
 		Reserva resv = new Reserva(rec, u, d, 10, 12, "Prova diversa", false);
-		OrdinadorRepo.saveOrUpdate(resv);
+		CtrlOrdinador.saveOrUpdate(resv);
 
 		// Reserva res = ReservaRepo.getByID(2L);
 		// System.out.println(res.getData() + " " + res.getHoraInici() + "-" +

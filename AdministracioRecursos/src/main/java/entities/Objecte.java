@@ -1,51 +1,29 @@
 package entities;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@SuppressWarnings("serial")
+import repositories.CtrlOrdinador;
+import repositories.CtrlProjector;
+
 @Entity
 @Table(name = "objectes")
-public class Objecte implements Serializable {
+public class Objecte extends Recurs {
 
-	private Recurs id;
 	private Sala sala;
-	private Integer type;
-
-	public Objecte(Recurs id, Sala sala, Integer type) {
-		super();
-		this.id = id;
+	
+	public Objecte(String nom, Sala sala) {
+		super(nom);
 		this.sala = sala;
-		this.type = type;
-	}
-
-	public Objecte() {
-		super();
-	}
-
-	@Id
-	@OneToOne
-	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
-	public Recurs getId() {
-		return id;
-	}
-
-	public void setId(Recurs id) {
-		if (id.getType() == 1)
-			this.id = id;
-		else
-			System.out.println("El Recurs " + id.getNom() + " no és un Objecte");
 	}
 
 	@OneToOne
-	@JoinColumn(name = "idsala", referencedColumnName = "id", nullable = true)
+	@JoinColumn(name = "sala", referencedColumnName = "nom", nullable = true)
 	public Sala getSala() {
 		return sala;
 	}
@@ -54,18 +32,25 @@ public class Objecte implements Serializable {
 		this.sala = sala;
 	}
 
-	@Column(name = "type", nullable = false)
-	public Integer getType() {
-		return type;
-	}
-
-	public void setType(Integer type) {
-		this.type = type;
+	@Transient
+	public Object[] getUniqueConstraint() {
+		return super.getUniqueConstraint();
 	}
 
 	@Transient
-	public Object[] getUniqueConstraint() {
-		return this.id.getUniqueConstraint() ;
+	public ArrayList<String> getInfo(CtrlOrdinador ordRep, CtrlProjector projRep) {
+		ArrayList<String> toReturn = new ArrayList<String>();
+		// if (type == 0) {
+		//// Ordinador ord = ordRep.getByID(getId().getId());
+		// toReturn.addAll(ordRep.getByID(getId().getId()).getInfo());
+		// toReturn.add(null);
+		// } else {
+		// toReturn.add(null);
+		// toReturn.add(null);
+		// toReturn.add(projRep.getByID(getId().getId()).getResolucio().toString());
+		// }
+		return toReturn;
+
 	}
 
 }

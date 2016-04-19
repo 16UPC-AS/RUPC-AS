@@ -1,47 +1,31 @@
 package entities;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "ordinadors")
-public class Ordinador implements Serializable {
+public class Ordinador extends Recurs {
 
-	private Objecte id;
 	private String marca;
 	private String model;
+	private Sala sala;
 
-	public Ordinador(Objecte id, String marca, String model) {
-		super();
-		this.id = id;
+	public Ordinador(String nom, Sala sala, String marca, String model) {
+		super(nom);
 		this.marca = marca;
 		this.model = model;
+		this.sala = sala;
 	}
 
 	public Ordinador() {
 		super();
-	}
-
-	@Id
-	@OneToOne
-	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
-	public Objecte getId() {
-		return id;
-	}
-
-	public void setId(Objecte id) {
-		if (id.getType() == 0)
-			this.id = id;
-		else
-			System.out.println("L'Objecte " + id.getId().getNom() + " no és un Ordinador");
 	}
 
 	@Column(name = "marca", nullable = false, length = 20)
@@ -62,9 +46,27 @@ public class Ordinador implements Serializable {
 		this.model = model;
 	}
 
+	@OneToOne
+	@JoinColumn(name = "sala", referencedColumnName = "nom", nullable = true)
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
+	}
+
 	@Transient
 	public Object[] getUniqueConstraint() {
-		return this.id.getUniqueConstraint() ;
+		return super.getUniqueConstraint();
+	}
+
+	@Transient
+	public ArrayList<String> getInfo() {
+		ArrayList<String> info = new ArrayList<String>();
+		info.add(marca);
+		info.add(model);
+		return info;
 	}
 
 }

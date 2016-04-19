@@ -3,27 +3,25 @@ package repositories;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import entities.Ordinador;
 import entities.Recurs;
+import entities.Sala;
 import util.HibernateUtil;
 
-public class OrdinadorRepo extends BasicRepo {
+public class CtrlSala extends BasicRepo {
 
-	public static Ordinador getByID(Long id) {
-		Ordinador ordinador = new Ordinador();
+	public static Sala getByID(Long id) {
+		Sala sala = new Sala();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Ordinador where id = :id");
+			Query query = session.createQuery("from Sala where id = :id");
 			query.setLong("id", id);
-			ordinador = (Ordinador) query.list().get(0);
-			Hibernate.initialize(ordinador.getId());
+			sala = (Sala) query.list().get(0);
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -33,9 +31,9 @@ public class OrdinadorRepo extends BasicRepo {
 				session.close();
 			}
 		}
-		return ordinador;
+		return sala;
 	}
-
+	
 	public static List<Recurs> getAll() {
 		List<Recurs> mList = new ArrayList<Recurs>();
 		Session session = null;
@@ -43,7 +41,7 @@ public class OrdinadorRepo extends BasicRepo {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Ordinador");
+			Query query = session.createQuery("from Sala");
 			mList = query.list();
 
 		} catch (Exception e) {

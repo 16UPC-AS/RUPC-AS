@@ -1,45 +1,29 @@
 package entities;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "projectors")
-public class Projector implements Serializable {
+public class Projector extends Recurs {
 
-	private Objecte id;
 	private String resolucio;
+	private Sala sala;
 
-	public Projector(Objecte id, String resolucio) {
-		super();
-		this.id = id;
+	public Projector(String nom, Sala sala, String resolucio) {
+		super(nom);
 		this.resolucio = resolucio;
+		this.sala = sala;
 	}
 
 	public Projector() {
 		super();
-	}
-
-	@Id
-	@OneToOne
-	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
-	public Objecte getId() {
-		return id;
-	}
-
-	public void setId(Objecte id) {
-		if (id.getType() == 1)
-			this.id = id;
-		else
-			System.out.println("L'Objecte " + id.getId().getNom() + " no és un Projector");
 	}
 
 	@Column(name = "resolucio", nullable = false, length = 20)
@@ -51,9 +35,25 @@ public class Projector implements Serializable {
 		this.resolucio = resolucio;
 	}
 
+	@OneToOne
+	@JoinColumn(name = "sala", referencedColumnName = "nom", nullable = true)
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
+	}
+
 	@Transient
 	public Object[] getUniqueConstraint() {
-		return this.id.getUniqueConstraint() ;
+		return super.getUniqueConstraint();
+	}
+
+	@Transient
+	public ArrayList<String> getInfo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

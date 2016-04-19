@@ -1,20 +1,26 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import repositories.ObjecteRepo;
+import repositories.CtrlOrdinador;
+import repositories.CtrlProjector;
+import repositories.CtrlReserva;
+import repositories.CtrlSala;
+
 @Entity
-@Table(name = "recursos", uniqueConstraints = @UniqueConstraint(columnNames = { "nom" }) )
+@Table(name = "recursos", uniqueConstraints = @UniqueConstraint(columnNames = { "nom" }))
 public class Recurs {
 
-	private Long id;
 	private String nom;
 	private Integer type;
 
@@ -34,17 +40,6 @@ public class Recurs {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq_gen")
-	@SequenceGenerator(name = "user_seq_gen", sequenceName = "recursos_id_sec")
-	@Column(name = "id", unique = true, nullable = false)
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	@Column(name = "nom", nullable = false, length = 20)
 	public String getNom() {
 		return nom;
@@ -66,6 +61,46 @@ public class Recurs {
 	@Transient
 	public Object[] getUniqueConstraint() {
 		return new Object[] { this.getNom() };
+	}
+
+	@Transient
+	public ArrayList<String> estasDisp(Date d, Integer hi, Integer hf, ObjecteRepo objRep, CtrlSala salaRep,
+			CtrlProjector projRep, CtrlOrdinador ordRep) {
+
+		List<Reserva> lReserv = CtrlReserva.getByRecurs(this);
+		if (lReserv != null)
+			for (Reserva r : lReserv) {
+				if (!r.esDisponible(d, hi, hf))
+					return null;
+			}
+		return this.getInfo(salaRep, objRep, ordRep, projRep);
+
+	}
+
+	@Transient
+	private ArrayList<String> getInfo(CtrlSala salaRep, ObjecteRepo objRep, CtrlOrdinador ordRep,
+			CtrlProjector projRep) {
+		ArrayList<String> toReturn = new ArrayList<String>();
+//		if (type == 0) {
+//			toReturn.add(nom);
+//			toReturn.add(null);
+//			toReturn.add(null);
+//			toReturn.add(null);
+//			toReturn.addAll(salaRep.getByID(id).getInfo(objRep, ordRep, projRep));
+//		} else {
+//			Objecte obj = objRep.getByID(id);
+//			if (obj.getSala() == null) {
+//				toReturn.add(nom);
+//				toReturn.addAll(obj.getInfo(ordRep, projRep));
+//				toReturn.add(null);
+//				toReturn.add(null);
+//				toReturn.add(null);
+//				toReturn.add(null);
+//				toReturn.add(null);
+//			}
+//			else return null;
+//		}
+		return toReturn;
 	}
 
 }

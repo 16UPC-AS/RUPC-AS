@@ -7,23 +7,23 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import entities.Projector;
 import entities.Recurs;
-import entities.Reserva;
 import util.HibernateUtil;
 
-public class ReservaRepo extends BasicRepo {
+public class CtrlProjector extends BasicRepo {
 
-	public static Reserva getByID(Long id) {
-		Reserva reserva = new Reserva();
+	public static Projector getByID(Long id) {
+		Projector projector = new Projector();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Reserva where id = :id");
+			Query query = session.createQuery("from Projector where id = :id");
 			query.setLong("id", id);
-			reserva = (Reserva) query.list().get(0);
-			Hibernate.initialize(reserva.getId());
+			projector = (Projector) query.list().get(0);
+			Hibernate.initialize(projector.getSala());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -33,7 +33,7 @@ public class ReservaRepo extends BasicRepo {
 				session.close();
 			}
 		}
-		return reserva;
+		return projector;
 	}
 
 	public static List<Recurs> getAll() {
@@ -43,7 +43,7 @@ public class ReservaRepo extends BasicRepo {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Reserva");
+			Query query = session.createQuery("from Projector");
 			mList = query.list();
 
 		} catch (Exception e) {

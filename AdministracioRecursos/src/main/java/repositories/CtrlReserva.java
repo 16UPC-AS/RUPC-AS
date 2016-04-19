@@ -7,23 +7,23 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import entities.Projector;
 import entities.Recurs;
+import entities.Reserva;
 import util.HibernateUtil;
 
-public class ProjectorRepo extends BasicRepo {
+public class CtrlReserva extends BasicRepo {
 
-	public static Projector getByID(Long id) {
-		Projector projector = new Projector();
+	public static Reserva getByID(Long id) {
+		Reserva reserva = new Reserva();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Projector where id = :id");
+			Query query = session.createQuery("from Reserva where id = :id");
 			query.setLong("id", id);
-			projector = (Projector) query.list().get(0);
-			Hibernate.initialize(projector.getId());
+			reserva = (Reserva) query.list().get(0);
+			Hibernate.initialize(reserva.getId());
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -33,7 +33,7 @@ public class ProjectorRepo extends BasicRepo {
 				session.close();
 			}
 		}
-		return projector;
+		return reserva;
 	}
 
 	public static List<Recurs> getAll() {
@@ -43,7 +43,7 @@ public class ProjectorRepo extends BasicRepo {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Projector");
+			Query query = session.createQuery("from Reserva");
 			mList = query.list();
 
 		} catch (Exception e) {
@@ -57,6 +57,27 @@ public class ProjectorRepo extends BasicRepo {
 		}
 		return mList;
 
+	}
+
+	public static List<Reserva> getByRecurs(Recurs recurs) {
+		List<Reserva> mList = new ArrayList<Reserva>();
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
+
+			Query query = session.createQuery("from Reserva where idrecurs  = :id");
+			mList = query.list();
+		} catch (Exception e) {
+			if (session != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return mList;
 	}
 
 }

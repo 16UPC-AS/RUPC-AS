@@ -68,7 +68,7 @@ public class Reserva implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "idrecurs", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "recurs", referencedColumnName = "nom", nullable = false)
 	public Recurs getRecurs() {
 		return recurs;
 	}
@@ -78,7 +78,7 @@ public class Reserva implements Serializable {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "idusuari", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "usuari", referencedColumnName = "username", nullable = false)
 	public Usuari getUsuari() {
 		return usuari;
 	}
@@ -135,8 +135,8 @@ public class Reserva implements Serializable {
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	@JoinTable(name = "esnotifica", joinColumns = {
-			@JoinColumn(name = "idreserva", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "idusuari", nullable = false, updatable = false) })
+			@JoinColumn(name = "reserva", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "usuari", nullable = false, updatable = false) })
 	public Set<Usuari> getUsuaris() {
 		return usuaris;
 	}
@@ -148,6 +148,10 @@ public class Reserva implements Serializable {
 	@Transient
 	public Object[] getUniqueConstraint() {
 		return new Object[] { getRecurs(), getData(), getHoraInici() };
+	}
+
+	public boolean esDisponible(Date d, Integer hi, Integer hf) {
+		return (!data.equals(d)) || ( hi>=horaFi || hf <= horaInici);
 	}
 
 }

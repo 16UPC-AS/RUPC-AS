@@ -7,23 +7,22 @@ import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import entities.Ordinador;
 import entities.Recurs;
-import entities.Sala;
 import util.HibernateUtil;
 
-public class SalaRepo extends BasicRepo {
+public class CtrlOrdinador extends BasicRepo {
 
-	public static Sala getByID(Long id) {
-		Sala sala = new Sala();
+	public static Ordinador getByID(Long id) {
+		Ordinador ordinador = new Ordinador();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Sala where id = :id");
+			Query query = session.createQuery("from Ordinador where id = :id");
 			query.setLong("id", id);
-			sala = (Sala) query.list().get(0);
-			Hibernate.initialize(sala.getId());
+			ordinador = (Ordinador) query.list().get(0);
 		} catch (Exception e) {
 			if (session != null) {
 				session.getTransaction().rollback();
@@ -33,30 +32,7 @@ public class SalaRepo extends BasicRepo {
 				session.close();
 			}
 		}
-		return sala;
-	}
-	
-	public static Sala getByPK(Object arr[]) {
-		Recurs recurs = new Recurs();
-		Session session = null;
-		try {
-			session = HibernateUtil.getSessionFactory().openSession();
-			session.beginTransaction();
-
-			Query query = session.createQuery("from Recurs where nom = :nom");
-			query.setString("nom", (String) arr[0]);
-			recurs = (Recurs) query.list().get(0);
-			Hibernate.initialize(recurs.getId());
-		} catch (Exception e) {
-			if (session != null) {
-				session.getTransaction().rollback();
-			}
-		} finally {
-			if (session != null) {
-				session.close();
-			}
-		}
-		return getByID(recurs.getId());
+		return ordinador;
 	}
 
 	public static List<Recurs> getAll() {
@@ -66,7 +42,7 @@ public class SalaRepo extends BasicRepo {
 			session = HibernateUtil.getSessionFactory().openSession();
 			session.beginTransaction();
 
-			Query query = session.createQuery("from Sala");
+			Query query = session.createQuery("from Ordinador");
 			mList = query.list();
 
 		} catch (Exception e) {

@@ -1,47 +1,32 @@
 package entities;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@SuppressWarnings("serial")
+import repositories.ObjecteRepo;
+import repositories.CtrlOrdinador;
+import repositories.CtrlProjector;
+
 @Entity
 @Table(name = "sales")
-public class Sala implements Serializable {
+public class Sala extends Recurs {
 
-	private Recurs id;
 	private String ubicacio;
 	private Integer aforament;
 
-	public Sala(Recurs id, String ubicacio, Integer aforament) {
-		super();
-		this.id = id;
+	public Sala(String nom, String ubicacio, Integer aforament) {
+		super(nom);
 		this.ubicacio = ubicacio;
 		this.aforament = aforament;
 	}
 
 	public Sala() {
 		super();
-	}
-
-	@Id
-	@OneToOne
-	@JoinColumn(name = "id", referencedColumnName = "id", unique = true, nullable = false)
-	public Recurs getId() {
-		return id;
-	}
-
-	public void setId(Recurs id) {
-		if (id.getType() == 0)
-			this.id = id;
-		else
-			System.out.println("El Recurs " + id.getNom() + " no és una Sala");
 	}
 
 	@Column(name = "aforament", nullable = false)
@@ -64,7 +49,38 @@ public class Sala implements Serializable {
 
 	@Transient
 	public Object[] getUniqueConstraint() {
-		return this.id.getUniqueConstraint() ;
+		return super.getUniqueConstraint();
+	}
+
+	@Transient
+	public ArrayList<String> getInfo(ObjecteRepo objRep, CtrlOrdinador ordRep, CtrlProjector projRep) {
+		ArrayList<String> info = new ArrayList<String>();
+//		info.add(ubicacio);
+//		info.add(aforament.toString());
+//		// ArrayList<String> infoObj = new ArrayList<String>();
+//		List<Objecte> oList = objRep.getBySala(this);
+//		if (oList != null) {
+//			ArrayList<String> auxPc = null;
+//			ArrayList<String> auxPr = null;
+//			for (Objecte o : oList) {
+//				if (o.getType() == 0)
+//					auxPc = o.getInfo(ordRep, projRep);
+//				else
+//					auxPr = o.getInfo(ordRep, projRep);
+//			}
+//			if (auxPc != null) {
+//				info.add(auxPc.get(0));
+//				info.add(auxPc.get(1));
+//			} else {
+//				info.add(null);
+//				info.add(null);
+//			}
+//			if (auxPr != null)
+//				info.add(auxPr.get(2));
+//			else
+//				info.add(null);
+//		}
+		return info;
 	}
 
 }
