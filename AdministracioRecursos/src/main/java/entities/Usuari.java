@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "usuaris", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }) )
+@Table(name = "usuaris", uniqueConstraints = @UniqueConstraint(columnNames = { "username" }))
 public class Usuari {
 
 	private String username;
@@ -71,5 +72,15 @@ public class Usuari {
 	@Transient
 	public Object[] getUniqueConstraint() {
 		return new Object[] { this.getUsername() };
+	}
+
+	public ArrayList<String> getInfo() {
+
+		ArrayList<String> info = new ArrayList<String>();
+		info.add(getUsername());
+		info.add(getNom());
+		info.add(getMail());
+
+		return info;
 	}
 }
