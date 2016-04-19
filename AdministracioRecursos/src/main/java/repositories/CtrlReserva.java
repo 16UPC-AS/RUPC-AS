@@ -10,6 +10,7 @@ import org.hibernate.Session;
 
 import entities.Recurs;
 import entities.Reserva;
+import entities.Usuari;
 import util.HibernateUtil;
 
 public class CtrlReserva extends BasicRepo {
@@ -61,9 +62,33 @@ public class CtrlReserva extends BasicRepo {
 		}
 		return reserva;
 	}
+	
+	public static List<Reserva> getByUsuari(Usuari u) {
+		List<Reserva> mList = new ArrayList<Reserva>();
+		Session session = null;
+		try {
+			session = HibernateUtil.getSessionFactory().openSession();
+			session.beginTransaction();
 
-	public static List<Recurs> getAll() {
-		List<Recurs> mList = new ArrayList<Recurs>();
+			Query query = session.createQuery("from Reserva where usuari=: u");
+			query.setString("u", u.getUsername());
+			mList = query.list();
+
+		} catch (Exception e) {
+			if (session != null) {
+				session.getTransaction().rollback();
+			}
+		} finally {
+			if (session != null) {
+				session.close();
+			}
+		}
+		return mList;
+
+	}
+
+	public static List<Reserva> getAll() {
+		List<Reserva> mList = new ArrayList<Reserva>();
 		Session session = null;
 		try {
 			session = HibernateUtil.getSessionFactory().openSession();

@@ -34,7 +34,7 @@ public class CtrlRecurs extends BasicRepo {
 		return recurs;
 	}
 
-	public static Recurs getByPK(Object arr[]) {
+	public static Recurs getByPK(String nom) {
 		Recurs recurs = new Recurs();
 		Session session = null;
 		try {
@@ -42,7 +42,7 @@ public class CtrlRecurs extends BasicRepo {
 			session.beginTransaction();
 
 			Query query = session.createQuery("from Recurs where nom = :nom");
-			query.setString("nom", (String) arr[0]);
+			query.setString("nom", nom);
 			recurs = (Recurs) query.list().get(0);
 		} catch (Exception e) {
 			if (session != null) {

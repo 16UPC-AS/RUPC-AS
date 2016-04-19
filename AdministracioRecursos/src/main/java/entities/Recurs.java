@@ -66,4 +66,9 @@ public class Recurs {
 		return null;
 	}
 
+	@Transient
+	public Boolean etsSala() {
+		return false;
+	}
+
 }

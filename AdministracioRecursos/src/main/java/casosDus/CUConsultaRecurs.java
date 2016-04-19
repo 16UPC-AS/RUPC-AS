@@ -8,36 +8,8 @@ import dades.FactoriaDades;
 import entities.Recurs;
 
 public class CUConsultaRecurs {
-	
-	private static Date data;
-	private static Integer horaInici;
-	private static Integer horaFi;
 
-	public static Date getData() {
-		return data;
-	}
-
-	public static void setData(Date data) {
-		CUConsultaRecurs.data = data;
-	}
-
-	public static Integer getHoraInici() {
-		return horaInici;
-	}
-
-	public static void setHoraInici(Integer horaInici) {
-		CUConsultaRecurs.horaInici = horaInici;
-	}
-
-	public static Integer getHoraFi() {
-		return horaFi;
-	}
-
-	public static void setHoraFi(Integer horaFi) {
-		CUConsultaRecurs.horaFi = horaFi;
-	}
-
-	public static ArrayList<ArrayList<String>> obteRecursosDisponibles(Date d, Integer hi, Integer hf) {
+	public static ArrayList<ArrayList<String>> obteRecursosDisponiblesPerData(Date d, Integer hi, Integer hf) {
 		List<Recurs> recs = FactoriaDades.getCtrlRecurs().getAll();
 
 		ArrayList<ArrayList<String>> recDisps = new ArrayList<ArrayList<String>>();
@@ -50,11 +22,6 @@ public class CUConsultaRecurs {
 			;// activa EXC;
 
 		System.out.println(recDisps.toString());
-
-		setData(d);
-		setHoraInici(hi);
-		setHoraFi(hf);
-
 		return recDisps;
 	}
 

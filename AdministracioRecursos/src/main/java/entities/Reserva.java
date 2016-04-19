@@ -26,7 +26,7 @@ import javax.persistence.UniqueConstraint;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "recurs", "data", "horainici" }) )
+@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "recurs", "data", "horainici" }))
 public class Reserva implements Serializable {
 
 	private Long id;
@@ -49,7 +49,8 @@ public class Reserva implements Serializable {
 		this.horaFi = horaFi;
 		this.comentari = comentari;
 		this.esAmbNotificacio = esAmbNotificacio;
-		if (this.esAmbNotificacio) usuaris.add(usuari);
+		if (this.esAmbNotificacio)
+			usuaris.add(usuari);
 	}
 
 	public Reserva() {
@@ -153,7 +154,7 @@ public class Reserva implements Serializable {
 
 	@Transient
 	public boolean esDisponible(Date d, Integer hi, Integer hf) {
-		return (!data.equals(d)) || ( hi>=horaFi || hf <= horaInici);
+		return (!data.equals(d)) || (hi >= horaFi || hf <= horaInici);
 	}
 
 	@Transient
@@ -161,7 +162,7 @@ public class Reserva implements Serializable {
 		// TODO Auto-generated method stub
 		ArrayList<String> i = new ArrayList<String>();
 		ArrayList<String> mails = new ArrayList<String>();
-		for (Usuari u: usuaris)
+		for (Usuari u : usuaris)
 			mails.add(u.getMail());
 		String nr = getRecurs().getNom();
 		String nu = getUsuari().getUsername();
@@ -173,6 +174,14 @@ public class Reserva implements Serializable {
 		i.add(getComentari());
 		i.addAll(mails);
 		return i;
+	}
+
+	public boolean recursEtsSala() {
+		return getRecurs().etsSala();
+	}
+
+	public String getNomRecurs() {
+		return getRecurs().getNom();
 	}
 
 }

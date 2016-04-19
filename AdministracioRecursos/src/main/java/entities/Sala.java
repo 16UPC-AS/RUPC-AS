@@ -8,10 +8,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;		
+import javax.persistence.Transient;
 
 @Entity
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "sales")
 public class Sala extends Recurs {
 
@@ -69,6 +69,12 @@ public class Sala extends Recurs {
 	@Transient
 	public Object[] getUniqueConstraint() {
 		return super.getUniqueConstraint();
+	}
+
+	@Transient
+	@Override
+	public Boolean etsSala() {
+		return true;
 	}
 
 	@Transient
