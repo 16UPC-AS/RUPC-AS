@@ -1,11 +1,10 @@
 package casosDus;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
-
-import org.hibernate.type.SerializationException;
 
 import dades.FactoriaDades;
 import entities.Reserva;
@@ -42,7 +41,13 @@ public class CUUsuarisAAsig {
 	}
 
 	public static ArrayList<ArrayList<String>> obteUsuarisAAssignar(String nomR, Date d, Integer hi) {
+		Calendar cal = Calendar.getInstance();
+		Date dActual = cal.getTime();
+		d = cal.getTime();
 
+		if (dActual.after(d)) {
+			// activa excepcio [reservaCaducada]
+		}
 		Reserva r = FactoriaDades.getCtrlReserva().getByPK(nomR, d, hi);
 		if (!r.getEsAmbNotificacio())
 			;// activa excepcio [NoReservaAmbNotificacio]
