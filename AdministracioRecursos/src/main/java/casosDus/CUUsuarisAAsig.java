@@ -69,8 +69,6 @@ public class CUUsuarisAAsig {
 		setNomRecurs(nomR);
 		setData(d);
 		setHoraInici(hi);
-		
-
 		return infoUsuaris;
 	}
 }

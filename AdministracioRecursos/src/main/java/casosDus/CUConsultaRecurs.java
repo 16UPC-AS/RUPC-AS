@@ -8,7 +8,7 @@ import dades.FactoriaDades;
 import entities.Recurs;
 
 public class CUConsultaRecurs {
-
+	
 	private static Date data;
 	private static Integer horaInici;
 	private static Integer horaFi;
@@ -37,7 +37,7 @@ public class CUConsultaRecurs {
 		CUConsultaRecurs.horaFi = horaFi;
 	}
 
-	public static ArrayList<ArrayList<String>> consultaRecurs(Date d, Integer hi, Integer hf) {
+	public static ArrayList<ArrayList<String>> obteRecursosDisponibles(Date d, Integer hi, Integer hf) {
 		List<Recurs> recs = FactoriaDades.getCtrlRecurs().getAll();
 
 		ArrayList<ArrayList<String>> recDisps = new ArrayList<ArrayList<String>>();

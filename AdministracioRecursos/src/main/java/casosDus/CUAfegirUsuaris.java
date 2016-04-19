@@ -45,14 +45,14 @@ public class CUAfegirUsuaris {
 
 	public static void obteUsuarisAAssignar(ArrayList<String> usuaris) {
 
-		Set<Usuari> usuReserv = new HashSet<Usuari>();		
-		for (String u: usuaris){
+		Set<Usuari> usuReserv = new HashSet<Usuari>();
+		for (String u : usuaris) {
 			usuReserv.add(FactoriaDades.getCtrlUsuari().getByPK(u));
-		}				
-		Reserva r = FactoriaDades.getCtrlReserva().getByPK(CUUsuarisAAsig.getNomRecurs(), CUUsuarisAAsig.getData(),CUUsuarisAAsig.getHoraInici());		
-		r.getUsuaris().addAll(usuReserv);		
+		}
+		Reserva r = FactoriaDades.getCtrlReserva().getByPK(CUUsuarisAAsig.getNomRecurs(), CUUsuarisAAsig.getData(),
+				CUUsuarisAAsig.getHoraInici());
+		r.getUsuaris().addAll(usuReserv);
 		BasicRepo.saveOrUpdate(r);
-		
-		
+
 	}
 }
