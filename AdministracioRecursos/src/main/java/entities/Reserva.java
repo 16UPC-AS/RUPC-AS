@@ -143,6 +143,7 @@ public class Reserva implements Serializable {
 
 	public void setUsuaris(Set<Usuari> usuaris) {
 		this.usuaris = usuaris;
+		
 	}
 
 	@Transient
