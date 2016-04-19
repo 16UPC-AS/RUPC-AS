@@ -10,6 +10,8 @@ import dades.FactoriaDades;
 import entities.Recurs;
 
 public class CUConsultaRecurs {
+	
+	
 	public static ArrayList<ArrayList<String>> consultaRecurs(Date d, Integer hi, Integer hf) {
 		List<Recurs> recs = FactoriaDades.getCtrlRecurs().getAll();
 

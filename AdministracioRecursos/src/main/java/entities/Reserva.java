@@ -25,7 +25,7 @@ import javax.persistence.UniqueConstraint;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "recurs", "data", "horainici" }) )
+@Table(name = "reserves", uniqueConstraints = @UniqueConstraint(columnNames = { "recurs", "data", "horainici" }))
 public class Reserva implements Serializable {
 
 	private Long id;
@@ -48,7 +48,8 @@ public class Reserva implements Serializable {
 		this.horaFi = horaFi;
 		this.comentari = comentari;
 		this.esAmbNotificacio = esAmbNotificacio;
-		if (this.esAmbNotificacio) usuaris.add(usuari);
+		if (this.esAmbNotificacio)
+			usuaris.add(usuari);
 	}
 
 	public Reserva() {
@@ -143,7 +144,6 @@ public class Reserva implements Serializable {
 
 	public void setUsuaris(Set<Usuari> usuaris) {
 		this.usuaris = usuaris;
-		
 	}
 
 	@Transient
@@ -152,7 +152,7 @@ public class Reserva implements Serializable {
 	}
 
 	public boolean esDisponible(Date d, Integer hi, Integer hf) {
-		return (!data.equals(d)) || ( hi>=horaFi || hf <= horaInici);
+		return (!data.equals(d)) || (hi >= horaFi || hf <= horaInici);
 	}
 
 }
